@@ -49,8 +49,8 @@ async function tester(fp, callback){
 
     const { Options: ChromeOptions } = require('selenium-webdriver/chrome');
     const webdriver = require('selenium-webdriver');
+    
     var points = 0;
-    var errorLog = [];
     const MAX_POINTS = 5;
 
 
@@ -70,6 +70,7 @@ async function tester(fp, callback){
 
 
 
+    // function that enters two incomes and checks if the total income is displayed correctly
     async function testIncome(){
 
         // adding first income
@@ -122,6 +123,7 @@ async function tester(fp, callback){
     }
 
 
+    // function that enters two expences and checks if the total expence is displayed correctly
     async function testExpence(){
 
         // adding first expence
@@ -190,17 +192,14 @@ async function tester(fp, callback){
             balance -= 1000
             results.push(["Checking if balance greater than expence", "&#10060"])
         }
-        
-
-
-        
     }
 
 
     function formatAmount(num){
         return (Math.round(num * 100) / 100).toFixed(2);
-      }
+    }
 
+    // function that ensures that the balance displayed is correct based on the above entered transactions
     async function testBalance(){
 
         let balanceDisplay = await driver.findElement(By.id("balanceDisplay")).getText();
@@ -212,10 +211,9 @@ async function tester(fp, callback){
             errorLog.push("Balance total incorrect")
             results.push(["Balance Total", "&#10060"])
         }
-
-
-        
     }
+
+
 
     // checks the order of the transactions displayed in the history list, and 
     // tests whether the entered amounts are displayed correctly for the entered transactions
@@ -259,10 +257,6 @@ async function tester(fp, callback){
 
     driver.quit()
 
-
-    
-    console.log("FINAL POINTS: " + points + "/" + MAX_POINTS)
-    // globalString = ("FINAL POINTS: " + points + "/" + MAX_PONTS)
     globalString = `<!DOCTYPE html>
     <html>
     <head>
@@ -361,12 +355,6 @@ async function tester(fp, callback){
       </body>
     </html>
     `
-
-    if (points != MAX_POINTS){
-        for (let i = 0; i < errorLog.length; i++){
-            console.log(errorLog[i])
-        }
-    }
 
     callback();
 
