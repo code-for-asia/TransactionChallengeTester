@@ -49,7 +49,7 @@ async function tester(fp, callback){
 
     const { Options: ChromeOptions } = require('selenium-webdriver/chrome');
     const webdriver = require('selenium-webdriver');
-    
+
     var points = 0;
     const MAX_POINTS = 5;
 
@@ -274,7 +274,7 @@ async function tester(fp, callback){
       <body style="background-color: #2f6fa3;">
         <div id="container">
             <div id="title" style="color: #d0dfe8; font-size: 3em; margin-bottom: 1em; text-align: center;">
-                <u><strong>RESULTS FROM TESTING</strong></u>
+                <u><strong>TEST DETAILS</strong></u>
             </div>
             <div id="table" style="background-color:white; width: 75%; margin: auto;">
                 <table class="table">
