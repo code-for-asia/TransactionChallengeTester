@@ -43,7 +43,7 @@ var balance;
 
 
 async function tester(fp, callback){
-    let FILE_PATH = " http://localhost:3000";
+    let FILE_PATH = fp;
 
     const {Builder, Key, By, until} = require("selenium-webdriver");
 
@@ -247,114 +247,134 @@ async function tester(fp, callback){
         }
     }
 
-    
-    driver.get(FILE_PATH)
+    let pathErr = false
+    let first = fp.split(':')[0]
 
-    await testIncome();
-    await testExpence();
-    await testBalance();
-    await testHistory();
+    if (first.length == fp.length){
+        pathErr = true
+    }
+    let sliced = fp.slice(first.length)
+    if (sliced[0] != ':'){
+        pathErr = true
+    }
 
-    driver.quit()
+    if (!pathErr){
+        driver.get(FILE_PATH)
 
-    globalString = `<!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="utf-8"/>
-        <title>Transactions React Challenge Results Template</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-        <script>
-            function refresh(){
-                window.location.reload();
-            }
-        </script>
-      </head>
-      <body style="background-color: #2f6fa3;">
-        <div id="container">
-            <div id="title" style="color: #d0dfe8; font-size: 3em; margin-bottom: 1em; text-align: center;">
-                <u><strong>TEST DETAILS</strong></u>
-            </div>
-            <div id="table" style="background-color:white; width: 75%; margin: auto;">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col" style="font-size: 1.35em;"></th>
-                            <th scope="col" style="font-size: 1.35em;"></th>
-                            <th scope="col" style="font-size: 1.35em;">Tested Property</th>
-                            <th scope="col" style="font-size: 1.35em;">Status</th>
-                          </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row" style="font-size: 1.25em;">Income</th>
-                            <th scope="row"></th>
-                            <td>${results[0][0]}</td>
-                            <td>${results[0][1]}</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+        await testIncome();
+        await testExpence();
+        await testBalance();
+        await testHistory();
 
-                        <tr>
-                            <th scope="row" style="font-size: 1.25em;">Expence</th>
-                            <th scope="row"></th>
-                            <td>${results[1][0]}</td>
-                            <td>${results[1][1]}</td>
-                            <td></td>
-                            <td></td>
-                      
-                        </tr>
+        driver.quit()
+
+        globalString = `<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8"/>
+            <title>Transactions React Challenge Results Template</title>
+            <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+            <script>
+                function back(){
+                    location.href = "index.html";
+                }
+            </script>
+        </head>
+        <body style="background-color: #2f6fa3;">
+            <div id="container">
+                <div id="title" style="color: #d0dfe8; font-size: 3em; margin-bottom: 1em; text-align: center;">
+                    <u><strong>TEST DETAILS</strong></u>
+                </div>
+                <div id="table" style="background-color:white; width: 75%; margin: auto;">
+                    <table class="table">
+                        <thead>
                             <tr>
-                            <th scope="row" style="font-size: 1.25em;">Balance Check</th>
-                            <th scope="row"></th>
-                            <td>${results[2][0]}</td>
-                            <td>${results[2][1]}</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                                <th scope="col" style="font-size: 1.35em;"></th>
+                                <th scope="col" style="font-size: 1.35em;"></th>
+                                <th scope="col" style="font-size: 1.35em;">Tested Property</th>
+                                <th scope="col" style="font-size: 1.35em;">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row" style="font-size: 1.25em;">Income</th>
+                                <th scope="row"></th>
+                                <td>${results[0][0]}</td>
+                                <td>${results[0][1]}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
 
-                        <tr>
-                            <th scope="row" style="font-size: 1.25em;">Balance Total</th>
-                            <th scope="row"></th>
-                            <td>${results[3][0]}</td>
-                            <td>${results[3][1]}</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                            
+                            <tr>
+                                <th scope="row" style="font-size: 1.25em;">Expence</th>
+                                <th scope="row"></th>
+                                <td>${results[1][0]}</td>
+                                <td>${results[1][1]}</td>
+                                <td></td>
+                                <td></td>
+                        
+                            </tr>
+                                <tr>
+                                <th scope="row" style="font-size: 1.25em;">Balance Check</th>
+                                <th scope="row"></th>
+                                <td>${results[2][0]}</td>
+                                <td>${results[2][1]}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
 
-                        <tr>
-                            <th scope="row" style="font-size: 1.25em;">History</th>
-                            <th scope="row"></th>
-                            <td>${results[4][0]}</td>
-                            <td>${results[4][1]}</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                            <tr>
+                                <th scope="row" style="font-size: 1.25em;">Balance Total</th>
+                                <th scope="row"></th>
+                                <td>${results[3][0]}</td>
+                                <td>${results[3][1]}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                                
 
-                    </tbody>
-                </table>
-            </div><br><br>  
-            <div id="totalScore">
-                <div id="subtitle" style="color: #d0dfe8; font-size: 1.5em; margin-bottom: 1em; text-align: center;">
-                    <strong>Final Results</strong>
-                </div>
-                <div class="card text-dark bg-light mb-3" style="width: 50%; margin: auto;">
-                    <div class="card-header">Code Status</div>
-                    <div class="card-body">
-                      <h5 class="card-title">Performance Score</h5>
-                      <p class="card-text">Congratulations! You have a final score of <strong>${points}/${MAX_POINTS}</strong> based on the test results shown above.</p>
+                            <tr>
+                                <th scope="row" style="font-size: 1.25em;">History</th>
+                                <th scope="row"></th>
+                                <td>${results[4][0]}</td>
+                                <td>${results[4][1]}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div><br><br>  
+                <div id="totalScore">
+                    <div id="subtitle" style="color: #d0dfe8; font-size: 1.5em; margin-bottom: 1em; text-align: center;">
+                        <strong>Final Results</strong>
                     </div>
-                  </div>
-                  <div class="col text-center">
-                    <button type="button" class="btn btn-light" onClick="refresh()" style="margin-top: 1.5rem; margin-bottom: 0.5em;"><i class="bi bi-arrow-left"></i> Retry</button>
+                    <div class="card text-dark bg-light mb-3" style="width: 50%; margin: auto;">
+                        <div class="card-header">Code Status</div>
+                        <div class="card-body">
+                        <h5 class="card-title">Performance Score</h5>
+                        <p class="card-text">Congratulations! You have a final score of <strong>${points}/${MAX_POINTS}</strong> based on the test results shown above.</p>
+                        </div>
+                    </div>
+                    <div class="col text-center">
+                        <button type="button" class="btn btn-light" onClick="back()" style="margin-top: 1.5rem; margin-bottom: 0.5em;"><i class="bi bi-arrow-left"></i> Retry</button>
+                    </div>
                 </div>
             </div>
-        </div>
-      </body>
-    </html>
-    `
+        </body>
+        </html>
+        `
+
+    }
+    else{
+        globalString = "Provided file path is invalid"
+    }
+
+    
+    
 
     callback();
 
