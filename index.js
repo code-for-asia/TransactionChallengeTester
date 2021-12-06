@@ -367,10 +367,6 @@ async function tester(fp, callback){
     else{
         globalString = "Provided file path is invalid"
     }
-
-    
-    
-
     callback();
 
 }
