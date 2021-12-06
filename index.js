@@ -38,10 +38,6 @@ var transactionArray;
 var balance;
 
 
-
-
-
-
 async function tester(fp, callback){
     let FILE_PATH = fp;
 
@@ -210,7 +206,6 @@ async function tester(fp, callback){
     }
 
 
-
     // checks the order of the transactions displayed in the history list, and 
     // tests whether the entered amounts are displayed correctly for the entered transactions
     // (added transactions were saved in transactionArray)
@@ -369,7 +364,4 @@ async function tester(fp, callback){
     callback();
 
 }
-
-
-
 
