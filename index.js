@@ -116,7 +116,6 @@ async function tester(fp, callback){
 
         }
         else{
-            errorLog.push("Income total incorrect")
             results.push(["Income total", "&#10060"])
         }
 
@@ -166,7 +165,6 @@ async function tester(fp, callback){
             results.push(["Expence total", "&#9989"])
         }
         else{
-            errorLog.push("Expence total incorrect")
             results.push(["Expence total", "&#10060"])
         }
 
@@ -187,7 +185,6 @@ async function tester(fp, callback){
             results.push(["Checking if balance greater than expence", "&#9989"])
         }
         catch{
-            errorLog.push("Insufficient balance alert not displayed")
             transactionArray.push(["Bill3", "$ 1000.00"])
             balance -= 1000
             results.push(["Checking if balance greater than expence", "&#10060"])
@@ -208,7 +205,6 @@ async function tester(fp, callback){
             results.push(["Balance Total", "&#9989"])
         }
         else{
-            errorLog.push("Balance total incorrect")
             results.push(["Balance Total", "&#10060"])
         }
     }
@@ -242,7 +238,6 @@ async function tester(fp, callback){
             results.push(["Transaction history ordering and amounts", "&#9989"])
         }
         else{
-            errorLog.push("The ordering or an amount in the transaction list is incorrect")
             results.push(["Transaction history order and amounts", "&#10060"])
         }
     }
